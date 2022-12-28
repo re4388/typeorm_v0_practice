@@ -5,6 +5,7 @@ import { PhotoMetadata } from "./entity/PhotoMetadata"
 import { User } from "./entity/User"
 import { Author } from "./entity/Author"
 import { Album } from "./entity/Album"
+import { Category } from "./entity/Category"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -15,7 +16,7 @@ export const AppDataSource = new DataSource({
     database: "test0",
     synchronize: true,
     logging: true,
-    entities: [User, Photo, PhotoMetadata, Author, Album],
+    entities: [User, Photo, PhotoMetadata, Author, Album, Category, Question],
     migrations: [],
     subscribers: [],
     // feature2
