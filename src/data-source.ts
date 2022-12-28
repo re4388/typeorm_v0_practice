@@ -18,4 +18,5 @@ export const AppDataSource = new DataSource({
     entities: [User, Photo, PhotoMetadata, Author, Album],
     migrations: [],
     subscribers: [],
+    // feature2
 })

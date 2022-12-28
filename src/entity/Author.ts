@@ -17,6 +17,7 @@ export class Author {
 
     @OneToMany(() => Photo, (photo) => photo.author)
     photos: Photo[]
+    // feature2
 }
 
 // id|name|

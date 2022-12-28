@@ -35,6 +35,7 @@ export class PhotoMetadata {
     @OneToOne(() => Photo, (photo) => photo.metadata)
     @JoinColumn()
     photo: Relation<Photo>
+    // feature2
 }
 
 // id|height|width|orientation|compressed|comment     |photoId|
