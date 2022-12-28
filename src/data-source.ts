@@ -6,6 +6,7 @@ import { User } from "./entity/User"
 import { Author } from "./entity/Author"
 import { Album } from "./entity/Album"
 import { Category } from "./entity/Category"
+import { Question } from "./entity/Question"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
