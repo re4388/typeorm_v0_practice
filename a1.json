@@ -1,0 +1,137 @@
+{
+    "quotation": {
+        "seviceRate": 10
+    },
+    "regionalRepairShops": [
+        {
+            "officeId": 72,
+            "memberIds": {
+                "type1": [],
+                "type2": [],
+                "type3": []
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 46,
+            "memberIds": {
+                "type1": [
+                    108
+                ],
+                "type2": [],
+                "type3": []
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 76,
+            "memberIds": {
+                "type1": [],
+                "type2": [
+                    466,
+                    491,
+                    502,
+                    365,
+                    493
+                ],
+                "type3": []
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 78,
+            "memberIds": {
+                "type1": [],
+                "type2": [],
+                "type3": []
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 9,
+            "memberIds": {
+                "type1": [],
+                "type2": [],
+                "type3": []
+            },
+            "enableWorkOrder": false,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 46,
+            "memberIds": {
+                "type1": [],
+                "type2": [],
+                "type3": []
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 83,
+            "memberIds": {
+                "type1": [
+                    24,
+                    155,
+                    267,
+                    273
+                ],
+                "type2": [
+                    264,
+                    134,
+                    135,
+                    277,
+                    531,
+                    534,
+                    535,
+                    538
+                ],
+                "type3": [
+                    368,
+                    89,
+                    96,
+                    539,
+                    157,
+                    211,
+                    436
+                ]
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 84,
+            "memberIds": {
+                "type1": [],
+                "type2": [
+                    400,
+                    423,
+                    544
+                ],
+                "type3": [
+                    478
+                ]
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 1
+        },
+        {
+            "officeId": 25,
+            "memberIds": {
+                "type1": [
+                    407
+                ],
+                "type2": [],
+                "type3": [
+                    293
+                ]
+            },
+            "enableWorkOrder": true,
+            "regionalOperatorId": 2
+        }
+    ]
+}
