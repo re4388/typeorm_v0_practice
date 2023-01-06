@@ -7,17 +7,36 @@ import { Author } from "./entity/Author"
 import { Album } from "./entity/Album"
 import { Category } from "./entity/Category"
 import { Question } from "./entity/Question"
+import path = require("path")
+import { User2 } from "./entity/User2"
+import { Photo2 } from "./entity/Photo2"
+import { Group } from "./entity/Group"
+import { User3 } from "./entity/User3"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
-    port: 5433,
+    port: 5444,
     username: "postgres",
-    password: "123",
-    database: "test0",
+    password: "postgres",
+    database: "typeorm_v0",
     synchronize: true,
     logging: true,
-    entities: [User, Photo, PhotoMetadata, Author, Album, Category, Question],
+    // entities: [
+    //     path.join(
+    //         __dirname,
+    //         process.env.NODE_ENV === 'development' ?
+    //             '/**/*.entity{.ts,.js}' :
+    //             '/**/*.entity.js',
+    //     ),
+    // ],
+    entities: [
+        User2,
+        Photo2, User, Photo, PhotoMetadata, Author,
+        Album, Category, Question,
+        Group,
+        User3,
+    ],
     migrations: [],
     subscribers: [],
     // feature2

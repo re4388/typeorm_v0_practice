@@ -1,8 +1,42 @@
 import { AppDataSource } from "./data-source"
 import { Album } from "./entity/Album"
 import { Photo } from "./entity/Photo"
+import { Photo2 } from "./entity/Photo2"
 import { PhotoMetadata } from "./entity/PhotoMetadata"
 import { User } from "./entity/User"
+import { User2 } from "./entity/User2"
+// import { faker } from '@faker-js/faker';
+import * as facker from 'faker'
+import { createQueryBuilder } from "typeorm"
+import { Group } from "./entity/Group"
+import { User3 } from "./entity/User3"
+
+
+
+console.log("=========  start ========== ")
+
+// export const USERS: User[] = [];
+
+// export function createRandomUser(): User {
+//     return {
+//         userId: faker.datatype.uuid(),
+//         username: faker.internet.userName(),
+//         email: faker.internet.email(),
+//         avatar: faker.image.avatar(),
+//         password: faker.internet.password(),
+//         birthdate: faker.date.birthdate(),
+//         registeredAt: faker.date.past(),
+//     };
+// }
+
+// Array.from({ length: 10 }).forEach(() => {
+//     USERS.push(createRandomUser());
+// });
+
+
+
+
+
 
 
 async function insertOneUser() {
@@ -299,8 +333,221 @@ async function queryBuilderEx() {
 }
 
 
-AppDataSource.initialize().then(async () => {
+interface InsertUse2AndPhoto2Arg {
+    photoUrlList: [string, string]
+    userName: string
+}
 
+async function insertUse2AndPhoto2(InsertUse2AndPhoto2Arg: InsertUse2AndPhoto2Arg) {
+    const { photoUrlList, userName } = InsertUse2AndPhoto2Arg
+
+    const photo2_1 = new Photo2()
+    photo2_1.url = photoUrlList[0]
+    await AppDataSource.manager.save(photo2_1)
+
+    const photo2_2 = new Photo2()
+    photo2_2.url = photoUrlList[1]
+    await AppDataSource.manager.save(photo2_2)
+
+
+    const user2 = new User2()
+    user2.name = userName
+    user2.photos = [photo2_1, photo2_2]
+    await AppDataSource.manager.save(user2)
+
+}
+
+
+async function insertUser3AndGroup() {
+
+    const g1 = new Group()
+    g1.name = facker.internet.color()
+    await AppDataSource.manager.save(g1)
+
+    const g2 = new Group()
+    g2.name = facker.internet.color()
+    await AppDataSource.manager.save(g2)
+
+    const u3 = new User3()
+    u3.name = facker.internet.userName()
+    u3.email = facker.internet.email()
+    u3.groups = [g1, g2]
+    await AppDataSource.manager.save(u3)
+
+}
+
+
+
+
+
+AppDataSource.initialize().then(async () => {
+    // demo_leftJoinAndSelect()
+    demo_leftJoinAndMapOne()
+}).catch(error => console.log(error))
+
+
+async function demo_leftJoinAndMapOne() {
+
+    // prep
+    // insertUser3AndGroup()
+
+
+
+
+
+
+
+    // (async function a2() {
+    //     const user = await AppDataSource
+    //         .getRepository(User3)
+    //         .createQueryBuilder('userAlias')
+    //         // 只有 join, 不會拿到另外一個表的東西
+    //         // 不過你有group 可能，因此可以用另外一個表建立條件，如果要的話
+    //         // 類似下面加上一個 andWhere('group.name = ......)
+    //         .leftJoin('userAlias.groups', 'group')
+    //         .where('userAlias.id = :id', { id: 1 })
+    //         .getOne();
+
+    //     console.log(user)
+    //     // User3 {
+    //     //     id: 1,
+    //     //     name: 'Micheal.Haag',
+    //     //     email: 'Zane.Jaskolski54@hotmail.com'
+    //     //   }
+    // })()
+
+
+    // (async function a3() {
+    //     const user = await AppDataSource
+    //         .getRepository(User3)
+    //         .createQueryBuilder('userAlias')
+    //         // 如果要把 group那邊的東西都返回，要加上 select
+    //         .leftJoinAndSelect('userAlias.groups', 'group')
+    //         .where('userAlias.id = :id', { id: 1 })
+    //         .getOne();
+
+    //     console.log(user)
+    //     // User3 {
+    //     //     id: 1,
+    //     //     name: 'Micheal.Haag',
+    //     //     email: 'Zane.Jaskolski54@hotmail.com',
+    //     //     groups: [
+    //     //       Group { id: 1, name: '#774850' },
+    //     //       Group { id: 2, name: '#540a40' }
+    //     //     ]
+    //     //   }
+    // })()
+
+
+
+    (async function a1() {
+        const user = await AppDataSource
+            .getRepository(User3)
+            .createQueryBuilder('userAlias')
+            // 拿到上面的結果後，還可以另外用 結果去 map 另一個表內
+            // 屬性的值，然後只返回mapping的結果
+            .leftJoinAndMapOne(
+                'userAlias.groups', // mapToProperty
+                Group,              // entity
+                'group',            // alias             
+                'group.ownerId = userAlias.id' // mapping condition
+            )
+            .where('userAlias.id = :id', { id: 1 })
+            .getOne();
+
+        console.log(user)
+        // User3 {
+        //     id: 1,
+        //     name: 'Micheal.Haag',
+        //     email: 'Zane.Jaskolski54@hotmail.com',
+        //     group: Group { id: 1, name: '#774850' }
+        //   }
+    })()
+
+
+
+
+}
+
+
+function demo_leftJoinAndSelect() {
+    // ref: https://typeorm.io/select-query-builder#joining-and-mapping-functionality
+
+    // want to insert 2 photo2 into 1 user2
+    // const InsertUse2AndPhoto2Arg: InsertUse2AndPhoto2Arg = {
+    //     photoUrlList: [facker.internet.url(), facker.internet.url()],
+    //     userName: facker.internet.userName()
+    // }
+    // insertUse2AndPhoto2(InsertUse2AndPhoto2Arg)
+
+    ///////////////////////
+
+
+    // want to load user "Timber" with all of his photos:
+    // 用 leftJoinAndSelect 順便也幫你 select 好裡面的東西
+    // (async function a1() {
+    //     const user = await AppDataSource.getRepository(User2)
+    //         .createQueryBuilder("u2")  // u2 is alias 
+    //         .leftJoinAndSelect("u2.photos", "photoQQ") // photoQQ is also alias
+    //         .where("u2.name = :name", { name: "Myra_Corwin77" })
+    //         .andWhere("photoQQ.url = :url", { url: 'http://nina.name' })
+    //         .getOne()
+    //     console.log("user", user);
+    // })()
+
+    // result
+    // user User2 {
+    //     id: 2,
+    //     name: 'Myra_Corwin77',
+    //     photos: [ Photo2 { id: 3, url: 'http://nina.name' } ]
+    //   }
+
+
+    // want to join data without its selection
+    // 用 innerJoin 就沒有順便幫你 select 了
+    // (async function a2() {
+    //     const user = await AppDataSource.getRepository(User2)
+    //         .createQueryBuilder("u2")  // u2 is alias 
+    //         .innerJoin("u2.photos", "photoQQ")
+    //         .where("u2.name = :name", { name: "Myra_Corwin77" })
+    //         .andWhere("photoQQ.url = :url", { url: 'http://nina.name' })
+    //         .getOne()
+    //     console.log("user", user);
+    // })()
+    // result:
+    // user User2 { id: 2, name: 'Myra_Corwin77' }
+
+
+    // (async function a3() {
+    //     const user = await AppDataSource.getRepository(User2)
+    //         .createQueryBuilder("u2")
+    //         .leftJoinAndMapOne(
+    //             "u2.photo",
+    //             "u2.id",
+    //             "photoQQ",
+    //             "photoQQ.id = 1"
+    //         )
+    //         .where("u2.name = :name", { name: "Myra_Corwin77" })
+    //         .getOne()
+    //     console.log("user", user);
+    // })()
+    // result:
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+function practice1() {
     // insertOneUser()
     // insertPhoto()
     // insertPhotoV2()
@@ -322,7 +569,7 @@ AppDataSource.initialize().then(async () => {
     //     savePhotoAndMetaWithCascadeEnabled()
     // }
 
-    queryBuilderEx()
+    // queryBuilderEx()
 
 
     // getPhotoAndAlbum()
@@ -339,6 +586,4 @@ AppDataSource.initialize().then(async () => {
     // user.lastName = "Saw2"
     // user.age = 2
     // findUserByUser(user)
-
-
-}).catch(error => console.log(error))
+}
