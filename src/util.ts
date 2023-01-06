@@ -1,4 +1,4 @@
-import * as facker from 'faker'
+import * as _facker from 'faker'
 
 
 // console.log(facker.random.image)
@@ -12,4 +12,4 @@ import * as facker from 'faker'
 // console.log(facker.random.alphaNumeric)
 
 
-export const facker
+export const facker = _facker

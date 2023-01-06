@@ -8,7 +8,6 @@ import { facker } from './util'
 
 
 
-
 async function insertOneUser() {
     console.log("Inserting a new user into the database...")
     const user = new User()
