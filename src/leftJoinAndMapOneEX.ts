@@ -1,28 +1,48 @@
 import { AppDataSource } from "./data-source"
 import { Group } from "./entity/Group"
 import { User3 } from "./entity/User3"
-import { facker } from "./util"
+import { faker } from "./util"
+
+
+// faker.random.arrayElement()
+// console.log(faker.random.arrayElement([1, 2, 3, 4, 45]));
 
 
 async function insertUser3AndGroup() {
 
     const g1 = new Group()
-    g1.name = facker.internet.color()
+    g1.name = faker.internet.color()
     await AppDataSource.manager.save(g1)
 
     const g2 = new Group()
-    g2.name = facker.internet.color()
+    g2.name = faker.internet.color()
     await AppDataSource.manager.save(g2)
 
     const u3 = new User3()
-    u3.name = facker.internet.userName()
-    u3.email = facker.internet.email()
+    u3.name = faker.internet.userName()
+    u3.email = faker.internet.email()
     u3.groups = [g1, g2]
     await AppDataSource.manager.save(u3)
 
 }
 
 
+
+
+/**
+
+LEFT JOINs entity's table, SELECTs the data returned by a join 
+and MAPs all that data to some entity's property. 
+
+This is useful when you want to select some data and map it to some virtual property. 
+
+It assume that there is a single row of selecting data, 
+and mapped result will be a single selected value. 
+
+You need to specify an alias of the joined data. 
+Optionally, you can add condition and parameters used in condition.
+
+ */
 export async function demo_leftJoinAndMapOne() {
 
     // prep

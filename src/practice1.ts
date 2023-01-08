@@ -3,7 +3,7 @@ import { Album } from "./entity/Album"
 import { Photo } from "./entity/Photo"
 import { PhotoMetadata } from "./entity/PhotoMetadata"
 import { User } from "./entity/User"
-import { facker } from './util'
+import { faker } from './util'
 
 
 

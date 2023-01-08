@@ -1,7 +1,8 @@
 import { AppDataSource } from "./data-source"
 import { Photo2 } from "./entity/Photo2"
 import { User2 } from "./entity/User2"
-import { facker } from './util'
+import { faker } from './util'
+import { isNil } from 'ramda'
 
 
 interface InsertUse2AndPhoto2Arg {
@@ -9,36 +10,37 @@ interface InsertUse2AndPhoto2Arg {
     userName: string
 }
 
-async function insertUse2AndPhoto2(InsertUse2AndPhoto2Arg: InsertUse2AndPhoto2Arg) {
-    const { photoUrlList, userName } = InsertUse2AndPhoto2Arg
+async function seed() {
 
-    const photo2_1 = new Photo2()
-    photo2_1.url = photoUrlList[0]
-    await AppDataSource.manager.save(photo2_1)
+    const usersList: User2[] = []
 
-    const photo2_2 = new Photo2()
-    photo2_2.url = photoUrlList[1]
-    await AppDataSource.manager.save(photo2_2)
+    for (let i = 0; i < 20; i++) {
+        const user2 = new User2()
+        user2.name = faker.internet.userName()
+        const photos = []
+        for (let i = 0; i < 20; i++) {
+            const photo = new Photo2()
+            photo.url = faker.internet.url()
+            photos.push(photo)
+        }
+        await AppDataSource.manager.save(photos)
+        user2.photos = [...photos]
+        usersList.push(user2)
+    }
 
 
-    const user2 = new User2()
-    user2.name = userName
-    user2.photos = [photo2_1, photo2_2]
-    await AppDataSource.manager.save(user2)
+    await AppDataSource.manager.save(usersList)
 
 }
 
 export function demo_leftJoinAndSelect() {
 
-    console.log("run demo_leftJoinAndSelect")
+    isDBEmpty()
+
+
+    // console.log("run demo_leftJoinAndSelect")
     // ref: https://typeorm.io/select-query-builder#joining-and-mapping-functionality
 
-    // want to insert 2 photo2 into 1 user2
-    const InsertUse2AndPhoto2Arg: InsertUse2AndPhoto2Arg = {
-        photoUrlList: [facker.internet.url(), facker.internet.url()],
-        userName: facker.internet.userName()
-    }
-    insertUse2AndPhoto2(InsertUse2AndPhoto2Arg)
 
     ///////////////////////
 
@@ -95,4 +97,11 @@ export function demo_leftJoinAndSelect() {
 
 
 
+}
+
+async function isDBEmpty() {
+    const user = await AppDataSource.getRepository(User2).find()
+    if (!isNil(user)) return
+    console.log('db is empty, shall run seed')
+    seed()
 }
