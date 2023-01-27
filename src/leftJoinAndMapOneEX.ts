@@ -95,16 +95,16 @@ export async function demo_leftJoinAndMapOne() {
     (async function a1() {
         const user = await AppDataSource
             .getRepository(User3)
-            .createQueryBuilder('userAlias')
+            .createQueryBuilder('user3')
             // 拿到上面的結果後，還可以另外用 結果去 map 另一個表內
             // 屬性的值，然後只返回mapping的結果
             .leftJoinAndMapOne(
-                'userAlias.groups', // mapToProperty
+                'user3.groups', // mapToProperty
                 Group,              // entity
                 'group',            // alias             
-                'group.ownerId = userAlias.id' // mapping condition
+                'group.ownerId = user3.id' // mapping condition
             )
-            .where('userAlias.id = :id', { id: 1 })
+            .where('user3.id = :id', { id: 1 })
             .getOne();
 
         console.log(user)

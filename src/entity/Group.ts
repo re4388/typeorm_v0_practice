@@ -11,6 +11,7 @@ export class Group {
     name: string;
 
     // 這邊定義 group 被那個 user own 
+    // 欄位 owner 會自動 變成 ownerId 的 db 欄位
     @ManyToOne(() => User3, (user) => user.groups)
     @JoinColumn()
     owner: User3;

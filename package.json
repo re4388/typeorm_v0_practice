@@ -11,11 +11,15 @@
       "@types/ramda": "^0.26.8"
    },
    "dependencies": {
-      "typeorm": "0.3.11",
+      "@nestjs/common": "^9.2.1",
+      "@nestjs/typeorm": "^9.0.1",
+      "@nestjsx/crud": "^5.0.0-alpha.3",
+      "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
       "faker": "^4.1.0",
-      "reflect-metadata": "^0.1.13",
       "pg": "^8.4.0",
-      "ramda": "^0.25.0"
+      "ramda": "^0.25.0",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "^0.3.11"
    },
    "scripts": {
       "start": "ts-node src/index.ts",
