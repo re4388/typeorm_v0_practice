@@ -1,6 +1,6 @@
 import { AppDataSource } from "./data-source";
-import { Rent } from "./entity/Rent";
-import { RentPhoto } from "./entity/RentPhoto";
+import { Rent } from "./entity/typeormV0/Rent";
+import { RentPhoto } from "./entity/typeormV0/RentPhoto";
 
 export async function getRentingInfoByUserId(
   userId: string

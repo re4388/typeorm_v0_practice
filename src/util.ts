@@ -1,5 +1,4 @@
-import * as _faker from 'faker'
-
+import * as _faker from "faker";
 
 // console.log(facker.random.image)
 // console.log(facker.random.arrayElement)
@@ -11,5 +10,4 @@ import * as _faker from 'faker'
 // console.log(facker.random.words)
 // console.log(facker.random.alphaNumeric)
 
-
-export const faker = _faker
+export const faker = _faker;
