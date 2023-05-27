@@ -1,6 +1,6 @@
-import { chinookRun } from "./chinook_repo";
+import { chinookRun } from "./repo/chinook_repo";
 import { AppDataSource } from "./data-source";
-import { dvdRental } from "./dvdrental_repo";
+import { dvdRental } from "./repo/dvdrental_repo";
 import { Artist } from "./entity/chinook/Artist";
 
 AppDataSource.initialize()

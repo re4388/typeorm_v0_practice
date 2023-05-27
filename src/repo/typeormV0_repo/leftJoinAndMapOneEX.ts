@@ -1,7 +1,7 @@
-import { AppDataSource } from "./data-source";
-import { Group } from "./entity/typeormV0/Group";
-import { User3 } from "./entity/typeormV0/User3";
-import { faker } from "./util";
+import { AppDataSource } from "../../data-source";
+import { Group } from "../../entity/typeormV0/Group";
+import { User3 } from "../../entity/typeormV0/User3";
+import * as faker from "faker";
 
 // faker.random.arrayElement()
 // console.log(faker.random.arrayElement([1, 2, 3, 4, 45]));

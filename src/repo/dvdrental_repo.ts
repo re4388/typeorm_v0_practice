@@ -1,5 +1,5 @@
-import { AppDataSource } from "./data-source";
-import { Actor } from "./entity/dvdrental/Actor";
+import { AppDataSource } from "../data-source";
+import { Actor } from "../entity/dvdrental/Actor";
 
 export async function dvdRental() {
   try {
