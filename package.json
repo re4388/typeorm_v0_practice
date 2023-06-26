@@ -17,7 +17,7 @@
       "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
       "faker": "^4.1.0",
       "pg": "^8.4.0",
-      "ramda": "^0.25.0",
+      "ramda": "^0.29.0",
       "reflect-metadata": "^0.1.13",
       "typeorm": "^0.3.11"
    },
