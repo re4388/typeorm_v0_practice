@@ -19,7 +19,7 @@
       "pg": "^8.4.0",
       "ramda": "^0.25.0",
       "reflect-metadata": "^0.1.13",
-      "typeorm": "^0.3.11"
+      "typeorm": "^0.3.16"
    },
    "scripts": {
       "start": "ts-node src/index.ts",
